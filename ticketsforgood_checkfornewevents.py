@@ -64,6 +64,7 @@ def create_df(html_list):
         name = event.find('h5', class_="card-title fw-bold mb-3").string.strip('\n')
         info = [element.string.strip('\n') for element in event.find_all('div', class_='col')]
         location, dates, event_type = info
+        # there are several classes associated with links. try/except captures all of them and avoids exception.
         try:
             try:
                 url_ext = event.find('a', class_="btn py-3 rounded-3 fw-bold stretched-link btn-primary")['href']
@@ -115,4 +116,6 @@ df = create_df(html_lst)
 comp = compare_previous_search(df)
 print(comp)
 timestamp = datetime.datetime.now().strftime("%d%m%y-%H%M")
+# save full dataset and a dataset with new additions only
 df.to_csv(fr'C:\Users\callu\OneDrive\Documents\coding\webscrape\ticketsforgood\previous_scrapes\\{timestamp}.csv', index=False)
+comp.to_csv(fr'C:\Users\callu\OneDrive\Documents\coding\webscrape\ticketsforgood\new_events\\{timestamp}.csv', index=False)

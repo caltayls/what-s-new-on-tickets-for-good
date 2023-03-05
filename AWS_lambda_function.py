@@ -114,13 +114,13 @@ def lambda_handler(event, context):
 
 
     # relevant AWS parameters
-    key = 'AKIA5AP6XOXKEB4LZOUZ'
-    secret = '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'
+    key = SECRET
+    secret = KEY
     key_deets = {'aws_access_key_id': key,
                 'aws_secret_access_key': secret,
                 'region_name': 'eu-west-2'}
 
-    arn = r'arn:aws:ses:eu-west-2:894424282580:identity/callumtaylor955@gmail.com'
+    arn = ARN
 
     s3 = boto3.client('s3', **key_deets) # to access files
     ses = boto3.client('ses', **key_deets) # to email data
